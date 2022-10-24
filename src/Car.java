@@ -2,55 +2,20 @@ public class Car {
 
     public String brand;
     public String model;
-    public Integer productionYear;
-    public String productionCountry;
+    public double engineVolume;
     public String color;
-    public Double engineVolume;
+    public int productionYear;
+    public String productionCountry;
+
 
     public Car(String brand, String model, Integer productionYear, String productionCountry, String color, Double engineVolume) {
-
-        // Если не указана модель
-        if ((brand == null || brand.length() == 0)) {
-            this.brand = "default";
-        } else {
-            this.brand = brand;
-        }
-
-        // Если не указана марка
-        if ((model == null || model.length() == 0)) {
-            this.model = "default";
-        } else {
-            this.model = model;
-        }
-
-        // Если не указана страна сборки
-        if ((productionCountry == null || productionCountry.length() == 0)) {
-            this.productionCountry = "default";
-        } else {
-            this.productionCountry = productionCountry;
-        }
-
-        // Если не указан объем двигателя
-        if (engineVolume == null) {
-            this.engineVolume = 1.5;
-        } else {
-            this.engineVolume = engineVolume;
-        }
-
-        // Если не указан цвет
-        if (color == null || color.length() == 0) {
-            this.color = "Белый";
-        } else {
-            this.color = color;
-        }
-
-        // Если не указан год
-        if (productionYear == null) {
-            this.productionYear = 2000;
-        } else {
-            this.productionYear = productionYear;
-        }
-
+        this.brand = ValidationUtils.validOrDefault(brand, "[ default ]");
+        this.model = ValidationUtils.validOrDefault(model, "[ default ]");
+        this.productionCountry = ValidationUtils.validOrDefault(productionCountry, "[ default ]");
+        this.engineVolume = engineVolume > 0 ? engineVolume : 1.5;
+        this.color = ValidationUtils.validOrDefault(color, "Белый");
+        this.productionYear = productionYear >=0 ? productionYear : 2000;
+        this.productionCountry = ValidationUtils.validOrDefault(productionCountry, "Россия");
     }
 
     @Override
